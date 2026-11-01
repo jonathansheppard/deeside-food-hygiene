@@ -1,0 +1,308 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Food hygiene ratings in Flintshire | Deeside.com</title>
+<meta name="description" content="Search every food hygiene rating in Flintshire, see the latest inspections and which premises are rated 0 to 2. Updated three times a day from the Food Standards Agency.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--green:#88c425;--green-dk:#4d7a0c;--green-bg:#f6faee;--text:#2d2d2d;--muted:#6c757d;--border:#e9ecef;--bg:#f7f8f9;--red:#b91c1c;--red-bg:#fdecec;--amber:#b45309;--amber-bg:#fff4e0;--radius:10px}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--text);font-family:'Open Sans',-apple-system,'Segoe UI',Roboto,Arial,sans-serif;font-size:16px;line-height:1.5}
+a{color:var(--green-dk)}
+.wrap{max-width:960px;margin:0 auto;padding:0 16px}
+nav.site{background:#000;min-height:80px;display:flex;align-items:center}
+nav.site .in{max-width:1140px;width:100%;margin:0 auto;padding:0 16px;display:flex;justify-content:space-between;align-items:center}
+nav.site .brand{display:block;max-width:250px;width:62%}
+nav.site .brand img{width:100%;display:block}
+nav.site ul{list-style:none;margin:0;padding:0}
+nav.site li{display:inline-block}
+nav.site li a{color:#fff;text-decoration:none;font-size:14px;margin:0 6px;text-transform:uppercase}
+nav.site li a:hover{text-decoration:underline}
+.crumb{font-size:13px;color:var(--muted);margin:22px 0 0}
+.crumb a{color:var(--muted)}
+h1{font-size:30px;line-height:1.2;margin:6px 0 8px;font-weight:800}
+h2{font-size:22px;margin:0 0 4px;font-weight:700}
+.lede{font-size:17px;margin:0 0 6px;max-width:720px}
+.meta{font-size:13px;color:var(--muted);margin:0 0 20px}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:0 0 22px}
+.stat{background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:12px 14px}
+.stat b{display:block;font-size:26px;font-weight:800;line-height:1.1}
+.stat span{font-size:13px;color:var(--muted)}
+.stat.low b{color:var(--red)}
+section.panel{background:#fff;border:1px solid var(--border);border-radius:var(--radius);padding:18px;margin:0 0 20px}
+.sub{font-size:14px;color:var(--muted);margin:0 0 14px}
+.filters{display:grid;grid-template-columns:2fr 1fr 1fr;gap:10px;margin:0 0 14px}
+input,select{width:100%;font:inherit;font-size:16px;padding:10px 12px;border:1px solid #ced4da;border-radius:8px;background:#fff;color:var(--text)}
+input:focus,select:focus{outline:2px solid var(--green);border-color:var(--green)}
+.count{font-size:13px;color:var(--muted);margin:0 0 8px}
+.list{display:grid;gap:10px}
+.card{display:grid;grid-template-columns:76px 1fr 150px;gap:16px;align-items:start;border:1px solid var(--border);border-radius:var(--radius);padding:14px}
+.badge{width:76px;height:76px;border-radius:10px;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;line-height:1}
+.badge b{font-size:40px;font-weight:800}
+.badge small{font-size:11px;font-weight:700;margin-top:4px;line-height:1.1;padding:0 4px}
+.b5{background:#4d7a0c;color:#fff}.b4{background:#88c425;color:#1f3300}.b3{background:#fde7b0;color:#7c3a03}
+.b2,.b1,.b0{background:#b91c1c;color:#fff}.bx{background:var(--border);color:var(--muted)}.bx b{font-size:22px}
+.card .nm{font-weight:700;font-size:18px;line-height:1.3}
+.card .verdict{font-weight:700;font-size:15px;margin:1px 0 2px}
+.card .tp{font-size:13px;color:var(--muted)}
+.card .ad{font-size:14px;margin:2px 0}
+.card .dt{font-size:14px;color:var(--muted)}
+.card .why{list-style:none;margin:8px 0 6px;padding:0;font-size:14px}
+.card .why li{margin:2px 0;display:flex;gap:7px;align-items:baseline}
+.card .why i{flex:0 0 9px;height:9px;border-radius:50%;display:inline-block;transform:translateY(-1px)}
+.l0{background:#4d7a0c}.l1{background:#88c425}.l2{background:#e0a100}.l3,.l4,.l5{background:#b91c1c}
+.card .rr{font-size:13px;background:var(--bg);border-left:3px solid var(--green);padding:6px 8px;margin:6px 0 0}
+.card .pend{display:inline-block;font-size:12px;font-weight:600;color:var(--amber);background:var(--amber-bg);border-radius:4px;padding:1px 6px;margin-left:4px}
+.card a.fsa{font-size:13px}
+.card .stk{width:150px;height:auto;display:block}
+.card.low{border-color:#f3c4c4;background:#fffafa}
+.more[hidden]{display:none}
+.more{display:block;margin:12px auto 0;font:inherit;font-weight:600;background:#fff;color:var(--green-dk);border:2px solid var(--green);border-radius:8px;padding:8px 18px;cursor:pointer}
+.towns{display:grid;gap:6px}
+.trow{display:grid;grid-template-columns:150px 1fr 54px;gap:10px;align-items:center;font-size:14px}
+.tbar{background:var(--border);border-radius:4px;height:16px;overflow:hidden}
+.tbar i{display:block;height:100%;background:var(--green)}
+.trow .pc{text-align:right;font-weight:600}
+.trow .tn{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.explain p{margin:0 0 10px;font-size:15px;max-width:760px}
+.credit{font-size:13px;color:var(--muted);margin:0 auto 28px}
+.empty{color:var(--muted);font-size:15px;padding:8px 0}
+@media (max-width:640px){
+ h1{font-size:24px}
+ .stats{grid-template-columns:repeat(2,1fr)}
+ .filters{grid-template-columns:1fr 1fr}
+ .filters input{grid-column:1/-1}
+ .card{grid-template-columns:64px 1fr;gap:12px}
+ .badge{width:64px;height:64px}.badge b{font-size:32px}.badge small{font-size:10px}
+ .card .stk{grid-column:2;width:130px}
+ nav.site ul{display:none}nav.site .in{justify-content:center}
+ .trow{grid-template-columns:110px 1fr 46px}
+}
+</style>
+<style>
+/* Deeside.com footer (scoped, replaces the theme's widget footer) */
+.dsf{--dsf-bg:#0d0d0d;--dsf-bar:#1a1a1a;--dsf-rule:#2c2c2c;--dsf-text:#bdbdbd;--dsf-accent:#88c425;background:var(--dsf-bg);color:var(--dsf-text);font-family:"Open Sans",Arial,sans-serif;font-size:15px;line-height:1.45;position:static}
+.dsf a{color:var(--dsf-text);text-decoration:none;font-weight:400}
+.dsf a:hover,.dsf a:focus{color:#fff;text-decoration:underline;text-underline-offset:3px}
+.dsf .dsf-inner{max-width:1100px;margin:0 auto;padding:40px 16px 8px;display:grid;grid-template-columns:1.3fr 1fr 1fr 1fr 1fr;gap:32px}
+.dsf .dsf-brand{display:flex;gap:16px;align-items:flex-start}
+.dsf .dsf-brand img{width:76px;height:76px;flex:none;border-radius:50%}
+.dsf .dsf-brand p{margin:0 0 12px;color:var(--dsf-text)}
+.dsf .dsf-brand a.dsf-cta{color:#fff;font-weight:600}
+.dsf .dsf-brand a.dsf-cta span{color:var(--dsf-accent)}
+.dsf .dsf-col h2{color:#fff;font-size:15px;font-weight:700;margin:0 0 8px;padding:0 0 8px;border-bottom:1px solid var(--dsf-rule);background:none;text-transform:none;letter-spacing:0;line-height:1.3}
+.dsf ul{list-style:none;margin:0;padding:0}
+.dsf li{margin:0;padding:0;border:0}
+.dsf li a{display:block;padding:6px 0}
+.dsf .dsf-bar{background:var(--dsf-bar);margin-top:32px}
+.dsf .dsf-bar-inner{max-width:1100px;margin:0 auto;padding:14px 16px;display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px 24px;font-size:13px;color:#8a8a8a}
+.dsf .dsf-bar a{color:#8a8a8a}
+.dsf .dsf-partners a+a::before{content:"\00B7";margin:0 8px;color:#555}
+@media (max-width:900px){.dsf .dsf-inner{grid-template-columns:1fr 1fr 1fr;gap:32px}.dsf .dsf-brand{grid-column:1/-1}}
+@media (max-width:600px){.dsf .dsf-inner{grid-template-columns:1fr 1fr;gap:28px 20px;padding-top:32px}.dsf .dsf-brand img{width:60px;height:60px}.dsf .dsf-about{grid-column:1/-1}.dsf .dsf-about ul{display:flex;flex-wrap:wrap;gap:0 18px}.dsf li a{padding:8px 0}.dsf .dsf-bar-inner{flex-direction:column}}
+</style>
+</head>
+<body>
+<nav class="site"><div class="in">
+<a class="brand" href="https://www.deeside.com/"><img src="img/deeside-logo2020nobadge.jpg" alt="Deeside.com"></a>
+<ul><li><a href="https://www.deeside.com/news/">Latest</a></li><li><a href="https://www.deeside.com/fuel-price-map/">Fuel prices</a></li><li><a href="https://www.deeside.com/police-and-crime/">Police</a></li><li><a href="https://www.deeside.com/contact/">Contact</a></li><li><a href="https://www.deeside.com/advertise/">Advertise</a></li></ul>
+</div></nav>
+<main class="wrap">
+<p class="crumb"><a href="https://www.deeside.com/">Deeside.com</a> &rsaquo; Live tools</p>
+<h1>Food hygiene ratings in Flintshire</h1>
+<p class="lede">Every café, takeaway, pub, shop, school kitchen and care home in Flintshire that serves or sells food is inspected by the council and given a rating from 0 to 5. Search them all below.</p>
+<p class="meta" id="meta">Loading the latest ratings…</p>
+
+<div class="stats" id="stats"></div>
+
+<section class="panel" id="search">
+<h2>Search ratings</h2>
+<p class="sub">Search by business name, street or postcode, or pick a town.</p>
+<div class="filters">
+<input id="q" type="search" placeholder="e.g. Mold Road, CH5 or Costa" autocomplete="off" aria-label="Search by name, street or postcode">
+<select id="town" aria-label="Town"><option value="">All towns</option></select>
+<select id="rating" aria-label="Rating">
+<option value="">All ratings</option><option value="5">5</option><option value="4">4</option><option value="3">3</option>
+<option value="2">2</option><option value="1">1</option><option value="0">0</option>
+<option value="AwaitingInspection">Awaiting inspection</option><option value="Exempt">Exempt</option></select>
+</div>
+<p class="count" id="count"></p>
+<div class="list" id="results"></div>
+<button class="more" id="more" hidden>Show more</button>
+</section>
+
+<section class="panel">
+<h2>Latest ratings</h2>
+<p class="sub">Inspections published in the last 30 days, newest first.</p>
+<div class="list" id="latest"></div>
+<button class="more" id="latestMore" hidden>Show more</button>
+</section>
+
+<section class="panel">
+<h2>Rated 0 to 2</h2>
+<p class="sub">Premises whose most recent rating is 2 (improvement necessary), 1 (major improvement necessary) or 0 (urgent improvement necessary). A rating reflects what the inspector found on the day. Many businesses improve quickly and can ask for a re-inspection.</p>
+<div class="list" id="low"></div>
+</section>
+
+<section class="panel">
+<h2>Rated 5 by town</h2>
+<p class="sub">Share of rated premises with the top score of 5. Towns with at least 15 rated premises.</p>
+<div class="towns" id="towns"></div>
+</section>
+
+<section class="panel explain">
+<h2>How the ratings work</h2>
+<p>Council food safety officers inspect how food is handled and stored, the condition of the premises, and how well the business manages food safety. Each area is scored, and the scores combine into the rating. In those scores, lower is better.</p>
+<p><strong>5</strong> very good, <strong>4</strong> good, <strong>3</strong> generally satisfactory, <strong>2</strong> improvement necessary, <strong>1</strong> major improvement necessary, <strong>0</strong> urgent improvement necessary.</p>
+<p>In Wales, businesses must by law display their rating sticker where customers can see it, and takeaways must print a statement about it on their menus. In England, displaying it is voluntary.</p>
+<p>Businesses can appeal, ask for a re-inspection after making improvements, and publish a right to reply, which is shown with their rating. Home-based businesses do not have their address published.</p>
+</section>
+</main>
+<p class="wrap credit">Data: Food Standards Agency, Food Hygiene Rating Scheme, published under the <a href="https://www.nationalarchives.gov.uk/doc/open-government-licence/version/3/">Open Government Licence</a>. Rating images &copy; Food Standards Agency. Ratings are supplied by Flintshire County Council. Check the <a href="https://ratings.food.gov.uk/">FSA website</a> for the official record.</p>
+<footer class="dsf">
+  <div class="dsf-inner">
+    <div class="dsf-brand">
+      <img src="img/deeside-black-logofooter-new.jpg" alt="Deeside.com">
+      <div>
+        <p>Independent news for Deeside and Flintshire since 2014, covering the towns and villages along the River Dee and the border with Chester.</p>
+        <a class="dsf-cta" href="https://www.deeside.com/contact/">Got a story? Get in touch <span>&rarr;</span></a>
+      </div>
+    </div>
+    <div class="dsf-col">
+      <h2>Live tools</h2>
+      <ul>
+        <li><a href="https://www.deeside.com/deeside-right-now/">Weather, warnings and tides</a></li>
+        <li><a href="https://www.deeside.com/deeside-live-traffic-information/">Live traffic</a></li>
+        <li><a href="https://north.wales/a55-traffic-cameras">A55 traffic cameras</a></li>
+        <li><a href="https://www.deeside.com/trafficcams/">A494 traffic cameras</a></li>
+        <li><a href="https://www.deeside.com/fuel-price-map/">Fuel prices</a></li>
+        <li><a href="https://www.deeside.com/wrexham-bidston-line/">Wrexham to Bidston line</a></li>
+        <li><a href="https://www.deeside.com/police-and-crime/">Police and crime</a></li>
+      </ul>
+    </div>
+    <div class="dsf-col">
+      <h2>Town guides</h2>
+      <ul>
+        <li><a href="https://www.deeside.com/broughton-guide/">Broughton and Bretton</a></li>
+        <li><a href="https://www.deeside.com/buckley-guide/">Buckley</a></li>
+        <li><a href="https://www.deeside.com/connahs-quay-guide/">Connah's Quay</a></li>
+        <li><a href="https://www.deeside.com/flint-guide/">Flint</a></li>
+        <li><a href="https://www.deeside.com/hawarden-ewloe-guide/">Hawarden and Ewloe</a></li>
+        <li><a href="https://www.deeside.com/mold-guide/">Mold</a></li>
+        <li><a href="https://www.deeside.com/saltney-guide/">Saltney</a></li>
+        <li><a href="https://www.deeside.com/shotton-queensferry-guide/">Shotton and Queensferry</a></li>
+      </ul>
+    </div>
+    <div class="dsf-col">
+      <h2>Guides</h2>
+      <ul>
+        <li><a href="https://www.deeside.com/wepre-park/">Wepre Park</a></li>
+        <li><a href="https://www.deeside.com/theatr-clwyd/">Theatr Clwyd</a></li>
+        <li><a href="https://www.deeside.com/a55-a494-junction-guide/">A55 and A494 junctions</a></li>
+      </ul>
+    </div>
+    <div class="dsf-col dsf-about">
+      <h2>Deeside.com</h2>
+      <ul>
+        <li><a href="https://www.deeside.com/contact/">Contact us</a></li>
+        <li><a href="https://www.deeside.com/advertise/">Advertise</a></li>
+        <li><a href="https://www.deeside.com/complaints/">Complaints</a></li>
+        <li><a href="https://www.deeside.com/privacy-policy-further-information/">Privacy</a></li>
+        <li><a href="https://www.deeside.com/disclosure/">Disclosure</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="dsf-bar">
+    <div class="dsf-bar-inner">
+      <span>&copy; Deeside.com Est. 2014</span>
+      <span class="dsf-partners">Partner sites: <a href="https://www.wrexham.com/">Wrexham.com</a><a href="https://www.businesswales.com/">BusinessWales.com</a><a href="https://north.wales/">North.Wales</a><a href="https://news.wales">News.Wales</a></span>
+    </div>
+  </div>
+</footer>
+<script>
+(function(){
+const LABEL={"5":"Very good","4":"Good","3":"Generally satisfactory","2":"Improvement necessary","1":"Major improvement necessary","0":"Urgent improvement necessary","AwaitingInspection":"Awaiting inspection","Exempt":"Exempt","AwaitingPublication":"Awaiting publication"};
+const esc=s=>String(s==null?"":s).replace(/[&<>"']/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const fmt=d=>{if(!d)return"";const t=new Date(d+"T12:00:00");return t.toLocaleDateString("en-GB",{day:"numeric",month:"long",year:"numeric"})};
+const numeric=r=>/^[0-5]$/.test(r);
+const img=p=>p.k?`img/${p.k}.svg`:"";
+const HS={0:"Very good",5:"Good",10:"Generally satisfactory",15:"Improvement necessary",20:"Major improvement necessary",25:"Urgent improvement necessary"};
+const CS={0:"Very good",5:"Good",10:"Generally satisfactory",20:"Improvement necessary",30:"Major improvement necessary"};
+const lvl=(m,v)=>Object.keys(m).indexOf(String(v));
+function why(p){
+  if(!numeric(p.r)||!p.s||p.s.some(v=>v==null))return"";
+  const rows=[["Food handling",HS,p.s[0]],["Cleanliness and condition of premises",HS,p.s[1]],["Management of food safety",CS,p.s[2]]];
+  if(rows.some(r=>!(r[2] in r[1])))return"";
+  return '<ul class="why">'+rows.map(r=>`<li><i class="l${lvl(r[1],r[2])}"></i><span>${r[0]}: <strong>${r[1][r[2]]}</strong></span></li>`).join("")+"</ul>";
+}
+function badge(p){
+  if(numeric(p.r))return `<div class="badge b${p.r}" aria-hidden="true"><b>${p.r}</b><small>out of 5</small></div>`;
+  const t={AwaitingInspection:"Not yet rated",Exempt:"Exempt",AwaitingPublication:"Due soon"}[p.r]||p.r;
+  return `<div class="badge bx" aria-hidden="true"><b>&ndash;</b><small>${esc(t)}</small></div>`;
+}
+function card(p){
+  const low=["0","1","2"].includes(p.r);
+  const where=[p.a,p.pc].filter(Boolean).join(", ")||p.town;
+  const verdict=numeric(p.r)?`Rated ${p.r}: ${LABEL[p.r]}`:(LABEL[p.r]||p.r);
+  const date=(p.d&&numeric(p.r)&&p.d>"1950")?`Inspected ${fmt(p.d)}`:(p.r==="AwaitingInspection"?"Not yet inspected":"");
+  return `<div class="card${low?" low":""}">`+badge(p)+
+   `<div><div class="nm">${esc(p.n)}</div><div class="verdict">${esc(verdict)}</div><div class="tp">${esc(p.t)}</div>`+
+   `<div class="ad">${esc(where)}</div>`+
+   `<div class="dt">${esc(date)}${p.p?'<span class="pend">New rating pending</span>':""}</div>`+
+   why(p)+
+   (p.rr?`<div class="rr"><strong>Right to reply:</strong> ${esc(p.rr)}</div>`:"")+
+   `<a class="fsa" href="https://ratings.food.gov.uk/business/${p.id}" target="_blank" rel="noopener">Full details on the FSA website</a></div>`+
+   (img(p)?`<img class="stk" src="${img(p)}" alt="Official food hygiene rating sticker: ${esc(LABEL[p.r]||p.r)}" loading="lazy" width="150">`:"<div></div>")+
+   `</div>`;
+}
+function pager(el,btn,rows,step){
+  let shown=0;
+  function more(){el.insertAdjacentHTML("beforeend",rows.slice(shown,shown+step).map(card).join(""));shown+=step;btn.hidden=shown>=rows.length}
+  el.innerHTML="";btn.onclick=more;
+  if(!rows.length){el.innerHTML='<p class="empty">Nothing to show.</p>';btn.hidden=true;return}
+  more();
+}
+fetch("data/fhrs.json",{cache:"no-cache"}).then(r=>r.json()).then(data=>{
+  const all=data.premises;
+  const upd=new Date(data.updated);
+  document.getElementById("meta").innerHTML=`Updated ${upd.toLocaleString("en-GB",{day:"numeric",month:"long",hour:"2-digit",minute:"2-digit"})} from the Food Standards Agency. ${all.length.toLocaleString("en-GB")} premises.`;
+  const rated=all.filter(p=>numeric(p.r));
+  const five=rated.filter(p=>p.r==="5").length;
+  const low=rated.filter(p=>+p.r<=2).sort((a,b)=>a.r-b.r||b.d.localeCompare(a.d));
+  const cutoff=new Date(Date.now()-30*864e5).toISOString().slice(0,10);
+  const latest=all.filter(p=>p.d&&p.d>=cutoff).sort((a,b)=>b.d.localeCompare(a.d)||a.n.localeCompare(b.n));
+  document.getElementById("stats").innerHTML=[
+   [all.length.toLocaleString("en-GB"),"premises listed"],
+   [Math.round(five/rated.length*100)+"%","of rated premises score 5"],
+   [latest.length,"rated in the last 30 days"],
+   [low.length,"rated 0 to 2","low"]].map(s=>`<div class="stat ${s[2]||""}"><b>${s[0]}</b><span>${s[1]}</span></div>`).join("");
+  pager(document.getElementById("latest"),document.getElementById("latestMore"),latest,10);
+  document.getElementById("low").innerHTML=low.length?low.map(card).join(""):'<p class="empty">No premises are currently rated 0 to 2.</p>';
+  // towns
+  const byTown={};
+  rated.forEach(p=>{if(/^[A-Z]{1,2}\d/.test(p.town))return;(byTown[p.town]=byTown[p.town]||[0,0]);byTown[p.town][0]++;if(p.r==="5")byTown[p.town][1]++});
+  const towns=Object.entries(byTown).filter(([t,v])=>v[0]>=15).map(([t,v])=>[t,v[1]/v[0],v[0]]).sort((a,b)=>b[1]-a[1]);
+  document.getElementById("towns").innerHTML=towns.map(([t,f,n])=>`<div class="trow"><span class="tn" title="${n} rated premises">${esc(t)} <small style="color:var(--muted)">(${n})</small></span><span class="tbar"><i style="width:${(f*100).toFixed(1)}%"></i></span><span class="pc">${Math.round(f*100)}%</span></div>`).join("");
+  // search
+  const sel=document.getElementById("town");
+  Object.keys(all.reduce((o,p)=>(p.town&&!/^[A-Z]{1,2}\d/.test(p.town)&&(o[p.town]=1),o),{})).sort().forEach(t=>sel.insertAdjacentHTML("beforeend",`<option>${esc(t)}</option>`));
+  const q=document.getElementById("q"),rs=document.getElementById("rating");
+  all.forEach(p=>p._s=(p.n+" "+p.a+" "+p.pc+" "+p.town+" "+p.t).toLowerCase());
+  function run(){
+    const term=q.value.trim().toLowerCase(),t=sel.value,r=rs.value;
+    if(!term&&!t&&!r){document.getElementById("results").innerHTML="";document.getElementById("count").textContent="";document.getElementById("more").hidden=true;return}
+    const words=term.split(/\s+/).filter(Boolean);
+    const hits=all.filter(p=>(!t||p.town===t)&&(!r||p.r===r)&&words.every(w=>p._s.includes(w)));
+    document.getElementById("count").textContent=`${hits.length.toLocaleString("en-GB")} result${hits.length===1?"":"s"}`;
+    pager(document.getElementById("results"),document.getElementById("more"),hits,20);
+  }
+  let timer;q.addEventListener("input",()=>{clearTimeout(timer);timer=setTimeout(run,150)});
+  sel.addEventListener("change",run);rs.addEventListener("change",run);
+}).catch(()=>{document.getElementById("meta").textContent="Sorry, the ratings could not be loaded. Please try again shortly."});
+})();
+</script>
+</body>
+</html>
