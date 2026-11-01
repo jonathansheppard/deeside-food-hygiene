@@ -55,7 +55,7 @@ fetch('data/fhrs.json?t=' + Math.floor(Date.now() / 3600000)).then(r => r.json()
     </div>
     <div class="hd2">Latest inspections</div>
     ${recent.map(p => `<div class="row"><div class="r ${+p.r <= 2 ? 'low' : ''}">${p.r}</div>
-      <div class="nm"><b>${esc(p.n)}</b><span>${esc(p.town)} · ${day(p.d)}</span></div></div>`).join('')}
+      <div class="nm"><b>${esc(p.n)}</b><span>${/^[A-Z]{1,2}\d/.test(p.town || "") || !p.town ? "" : esc(p.town) + " · "}${day(p.d)}</span></div></div>`).join('')}
     <div class="card-ft"><span>Check any business</span><small>Food Standards Agency</small></div>`;
   size();
 }).catch(() => { document.getElementById('body').textContent = 'Food hygiene ratings are unavailable right now.'; size(); });
