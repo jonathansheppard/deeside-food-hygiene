@@ -62,9 +62,10 @@ input:focus,select:focus{outline:2px solid var(--green);border-color:var(--green
 .more[hidden]{display:none}
 .more{display:block;margin:12px auto 0;font:inherit;font-weight:600;background:#fff;color:var(--green-dk);border:2px solid var(--green);border-radius:8px;padding:8px 18px;cursor:pointer}
 .towns{display:grid;gap:6px}
-.trow{display:grid;grid-template-columns:150px 1fr 54px;gap:10px;align-items:center;font-size:14px}
+.trow{display:grid;grid-template-columns:150px 1fr 72px;gap:10px;align-items:center;font-size:14px}
 .tbar{background:var(--border);border-radius:4px;height:16px;overflow:hidden}
 .tbar i{display:block;height:100%;background:var(--green)}
+.tbar.red i{background:var(--red)}
 .trow .pc{text-align:right;font-weight:600}
 .trow .tn{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .explain p{margin:0 0 10px;font-size:15px;max-width:760px}
@@ -79,7 +80,7 @@ input:focus,select:focus{outline:2px solid var(--green);border-color:var(--green
  .badge{width:64px;height:64px}.badge b{font-size:32px}.badge small{font-size:10px}
  .card .stk{grid-column:2;width:130px}
  nav.site ul{display:none}nav.site .in{justify-content:center}
- .trow{grid-template-columns:110px 1fr 46px}
+ .trow{grid-template-columns:110px 1fr 64px}
 }
 
 /* Loading state while the data file downloads (1 Nov 2026) */
@@ -159,6 +160,13 @@ input:focus,select:focus{outline:2px solid var(--green);border-color:var(--green
 <h2>Rated 5 by town</h2>
 <p class="sub">Share of rated premises with the top score of 5. Towns with at least 15 rated premises.</p>
 <div class="towns" id="towns"></div>
+</section>
+
+<section class="panel">
+<h2>Low ratings by town</h2>
+<p class="sub">Premises rated 0, 1 or 2, where the inspector found improvement was needed, as a share of each town's rated premises. Towns with at least 15 rated premises.</p>
+<div class="towns" id="lowtowns"><p class="loading">Loading ratings</p></div>
+<p class="sub" id="lownone" style="margin-top:10px"></p>
 </section>
 
 <section class="panel explain">
@@ -292,6 +300,13 @@ fetch("data/fhrs.json",{cache:"no-cache"}).then(r=>r.json()).then(data=>{
   rated.forEach(p=>{if(/^[A-Z]{1,2}\d/.test(p.town))return;(byTown[p.town]=byTown[p.town]||[0,0]);byTown[p.town][0]++;if(p.r==="5")byTown[p.town][1]++});
   const towns=Object.entries(byTown).filter(([t,v])=>v[0]>=15).map(([t,v])=>[t,v[1]/v[0],v[0]]).sort((a,b)=>b[1]-a[1]);
   document.getElementById("towns").innerHTML=towns.map(([t,f,n])=>`<div class="trow"><span class="tn" title="${n} rated premises">${esc(t)} <small style="color:var(--muted)">(${n})</small></span><span class="tbar"><i style="width:${(f*100).toFixed(1)}%"></i></span><span class="pc">${Math.round(f*100)}%</span></div>`).join("");
+  // low ratings by town
+  const lowT=Object.entries(byTown).filter(([t,v])=>v[0]>=15).map(([t,v])=>[t,rated.filter(p=>p.town===t&&+p.r<=2).length,v[0]]);
+  const withLow=lowT.filter(x=>x[1]>0).sort((a,b)=>b[1]/b[2]-a[1]/a[2]||b[1]-a[1]);
+  const maxF=withLow.length?withLow[0][1]/withLow[0][2]:1;
+  document.getElementById("lowtowns").innerHTML=withLow.length?withLow.map(([t,k,n])=>`<div class="trow"><span class="tn" title="${n} rated premises">${esc(t)} <small style="color:var(--muted)">(${n})</small></span><span class="tbar red"><i style="width:${(k/n/maxF*100).toFixed(1)}%"></i></span><span class="pc">${k} &middot; ${Math.round(k/n*100)}%</span></div>`).join(""):'<p class="empty">No town has premises rated 0 to 2.</p>';
+  const none=lowT.filter(x=>x[1]===0).map(x=>x[0]).sort();
+  document.getElementById("lownone").textContent=none.length?"No premises rated 0 to 2 in: "+none.join(", ")+".":"";
   // search
   const sel=document.getElementById("town");
   Object.keys(all.reduce((o,p)=>(p.town&&!/^[A-Z]{1,2}\d/.test(p.town)&&(o[p.town]=1),o),{})).sort().forEach(t=>sel.insertAdjacentHTML("beforeend",`<option>${esc(t)}</option>`));
