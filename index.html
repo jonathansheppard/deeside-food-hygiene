@@ -81,6 +81,14 @@ input:focus,select:focus{outline:2px solid var(--green);border-color:var(--green
  nav.site ul{display:none}nav.site .in{justify-content:center}
  .trow{grid-template-columns:110px 1fr 46px}
 }
+
+/* Loading state while the data file downloads (1 Nov 2026) */
+.skel b,.skel span{color:transparent!important;background:#e9ecef;border-radius:4px;animation:dspulse 1.1s ease-in-out infinite}
+.skel b{width:55%;min-height:1.1em}.skel span{display:inline-block;width:80%}
+.loading{display:flex;align-items:center;justify-content:center;gap:10px;padding:22px 12px;color:#6c757d;font-size:14px}
+.loading::before{content:"";width:18px;height:18px;border:3px solid #e9ecef;border-top-color:#88c425;border-radius:50%;animation:dsspin .8s linear infinite}
+@keyframes dspulse{50%{opacity:.45}}@keyframes dsspin{to{transform:rotate(360deg)}}
+@media (prefers-reduced-motion:reduce){.skel b,.skel span,.loading::before{animation:none}}
 </style>
 <style>
 /* Deeside.com footer (scoped, replaces the theme's widget footer) */
@@ -116,7 +124,7 @@ input:focus,select:focus{outline:2px solid var(--green);border-color:var(--green
 <p class="lede">Every café, takeaway, pub, shop, school kitchen and care home in Flintshire that serves or sells food is inspected by the council and given a rating from 0 to 5. Search them all below.</p>
 <p class="meta" id="meta">Loading the latest ratings…</p>
 
-<div class="stats" id="stats"></div>
+<div class="stats" id="stats"><div class="stat skel"><b>0000</b><span>loading</span></div><div class="stat skel"><b>0000</b><span>loading</span></div><div class="stat skel"><b>0000</b><span>loading</span></div><div class="stat skel"><b>0000</b><span>loading</span></div></div>
 
 <section class="panel" id="search">
 <h2>Search ratings</h2>
@@ -137,14 +145,14 @@ input:focus,select:focus{outline:2px solid var(--green);border-color:var(--green
 <section class="panel">
 <h2>Latest ratings</h2>
 <p class="sub">Inspections published in the last 30 days, newest first.</p>
-<div class="list" id="latest"></div>
+<div class="list" id="latest"><p class="loading">Loading the latest ratings</p></div>
 <button class="more" id="latestMore" hidden>Show more</button>
 </section>
 
 <section class="panel">
 <h2>Rated 0 to 2</h2>
 <p class="sub">Premises whose most recent rating is 2 (improvement necessary), 1 (major improvement necessary) or 0 (urgent improvement necessary). A rating reflects what the inspector found on the day. Many businesses improve quickly and can ask for a re-inspection.</p>
-<div class="list" id="low"></div>
+<div class="list" id="low"><p class="loading">Loading ratings</p></div>
 </section>
 
 <section class="panel">
@@ -299,7 +307,7 @@ fetch("data/fhrs.json",{cache:"no-cache"}).then(r=>r.json()).then(data=>{
   }
   let timer;q.addEventListener("input",()=>{clearTimeout(timer);timer=setTimeout(run,150)});
   sel.addEventListener("change",run);rs.addEventListener("change",run);
-}).catch(()=>{document.getElementById("meta").textContent="Sorry, the ratings could not be loaded. Please try again shortly."});
+}).catch(()=>{document.getElementById("meta").textContent="Sorry, the ratings could not be loaded. Please try again shortly.";["stats","latest","low"].forEach(i=>document.getElementById(i).innerHTML="")});
 })();
 </script>
 </body>
