@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Food hygiene in Flintshire</title>
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+:root { --ink: #212529; --head: #2d2d2d; --muted: #6c757d; --rule: #e9ecef; --green: #88c425; --green-dk: #4d7a0c; --red: #b91c1c; }
+html, body { background: transparent; }
+body { font-family: 'Open Sans', -apple-system, 'Segoe UI', Roboto, Arial, sans-serif; color: var(--ink); -webkit-font-smoothing: antialiased; }
+a { color: inherit; text-decoration: none; }
+.card { display: block; background: #fff; border-top: 4px solid var(--green); }
+.card-hd { display: flex; justify-content: space-between; align-items: baseline; padding: 12px 14px 10px; border-bottom: 1px solid var(--rule); }
+.card-hd h3 { font-size: 17px; font-weight: 800; color: var(--head); letter-spacing: -.2px; }
+.card-hd .upd { font-size: 11px; color: var(--muted); }
+.card-ft { display: flex; justify-content: space-between; align-items: center; padding: 11px 14px 13px; border-top: 1px solid var(--rule); font-size: 13px; font-weight: 700; color: var(--green-dk); }
+.card-ft small { font-size: 10.5px; font-weight: 400; color: var(--muted); }
+.card:hover .card-ft span:first-child { text-decoration: underline; }
+.load { padding: 36px 14px; text-align: center; color: var(--muted); font-size: 12px; }
+.stats { display: grid; grid-template-columns: 1fr 1fr; padding: 10px 0; }
+.s { padding: 2px 14px; }
+.s + .s { border-left: 1px solid var(--rule); }
+.big { font-size: 30px; font-weight: 800; color: var(--head); letter-spacing: -1px; line-height: 1.1; }
+.big.low { color: var(--red); }
+.lbl { font-size: 12px; color: var(--muted); line-height: 1.35; }
+.hd2 { border-top: 1px solid var(--rule); padding: 9px 14px 2px; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .4px; color: var(--muted); }
+.row { display: flex; align-items: center; gap: 10px; padding: 6px 14px; }
+.row + .row { border-top: 1px solid var(--rule); }
+.r { flex: 0 0 30px; height: 30px; display: flex; align-items: center; justify-content: center; font-size: 17px; font-weight: 800; border: 2px solid var(--head); color: var(--head); }
+.r.low { border-color: var(--red); color: var(--red); }
+.nm { flex: 1; min-width: 0; font-size: 13px; line-height: 1.3; }
+.nm b { display: block; color: var(--head); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.nm span { font-size: 11.5px; color: var(--muted); }
+</style>
+</head>
+<body>
+<a class="card" id="w" href="https://hygiene.deeside.com/" target="_top">
+  <div class="card-hd"><h3>Food hygiene in Flintshire</h3><span class="upd" id="upd"></span></div>
+  <div class="load" id="body">Loading…</div>
+</a>
+<script>
+const esc = s => String(s == null ? '' : s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'})[c]);
+const day = d => new Date(d + 'T12:00:00Z').toLocaleDateString('en-GB', {day: 'numeric', month: 'short'});
+fetch('data/fhrs.json?t=' + Math.floor(Date.now() / 3600000)).then(r => r.json()).then(d => {
+  const rated = d.premises.filter(p => /^[0-5]$/.test(p.r));
+  const low = rated.filter(p => +p.r <= 2);
+  const fives = rated.filter(p => p.r === '5');
+  const recent = rated.filter(p => p.d).sort((a, b) => b.d.localeCompare(a.d)).slice(0, 4);
+  document.getElementById('upd').textContent = 'Updated ' + new Date(d.updated).toLocaleDateString('en-GB', {day: 'numeric', month: 'short'});
+  document.getElementById('body').outerHTML =
+    `<div class="stats">
+      <div class="s"><div class="big low">${low.length}</div><div class="lbl">places rated 0, 1 or 2</div></div>
+      <div class="s"><div class="big">${Math.round(fives.length / rated.length * 100)}%</div><div class="lbl">of rated places score 5</div></div>
+    </div>
+    <div class="hd2">Latest inspections</div>
+    ${recent.map(p => `<div class="row"><div class="r ${+p.r <= 2 ? 'low' : ''}">${p.r}</div>
+      <div class="nm"><b>${esc(p.n)}</b><span>${esc(p.town)} · ${day(p.d)}</span></div></div>`).join('')}
+    <div class="card-ft"><span>Check any business</span><small>Food Standards Agency</small></div>`;
+  size();
+}).catch(() => { document.getElementById('body').textContent = 'Food hygiene ratings are unavailable right now.'; size(); });
+function size() { try { parent.postMessage({deesideWidget: 'hygiene', height: document.getElementById('w').offsetHeight + 6}, '*'); } catch (e) {} }
+addEventListener('resize', size);
+if (window.ResizeObserver) new ResizeObserver(size).observe(document.getElementById('w'));
+</script>
+</body>
+</html>
