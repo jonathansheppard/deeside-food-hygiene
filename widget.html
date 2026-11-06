@@ -2,6 +2,7 @@
 <html lang="en-GB">
 <head>
 <meta charset="UTF-8">
+<script>window.__e = fetch('data/fhrs.json?t=' + Math.floor(Date.now() / 3600000)).then(function (r) { return r.json(); });</script>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Food hygiene in Flintshire</title>
 <style>
@@ -42,7 +43,7 @@ a { color: inherit; text-decoration: none; }
 <script>
 const esc = s => String(s == null ? '' : s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'})[c]);
 const day = d => new Date(d + 'T12:00:00Z').toLocaleDateString('en-GB', {day: 'numeric', month: 'short'});
-fetch('data/fhrs.json?t=' + Math.floor(Date.now() / 3600000)).then(r => r.json()).then(d => {
+(window.__e || fetch('data/fhrs.json?t=' + Math.floor(Date.now() / 3600000)).then(r => r.json())).then(d => {
   const rated = d.premises.filter(p => /^[0-5]$/.test(p.r));
   const low = rated.filter(p => +p.r <= 2);
   const fives = rated.filter(p => p.r === '5');
